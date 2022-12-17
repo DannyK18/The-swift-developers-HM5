@@ -11,7 +11,7 @@ import PhotosUI
 
 class PopUpVC: UIViewController {
     
-    weak var delegate: BirthdayVCDelegate?
+     var delegate: BirthdayVCDelegate?
     
     //MARK: DONEBUTTON
     private let DoneButton: UIButton = {

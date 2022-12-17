@@ -11,7 +11,7 @@ protocol BirthdayVCDelegate: AnyObject {
     func update(name: String, age: String, time: Date)
 }
 
-class BirthdayVC: UIViewController {
+class BirthdayVC: UIViewController, BirthdayVCDelegate {
     
     private let nameLabel: UILabel = {
         let label = UILabel()
@@ -32,10 +32,10 @@ class BirthdayVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.backgroundColor = .white
 
         navigationItem.title = "Birthday"
-        navigationItem.titleView?.tintColor = .orange
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProfile))
         [nameLabel, ageLabel].forEach { subview in
             view.addSubview(subview)
@@ -54,6 +54,10 @@ class BirthdayVC: UIViewController {
         present(popUpVc, animated: true, completion: nil)
     }
     
+    func update(name: String, age: String, time: Date) {
+        nameLabel.text? = name.capitalized
+        ageLabel.text? += age + " years"
+    }
     
     func applyConstraints() {
         
@@ -69,13 +73,5 @@ class BirthdayVC: UIViewController {
             ageLabel.trailingAnchor.constraint(equalTo: view.leadingAnchor, constant: -10),
             ageLabel.widthAnchor.constraint(equalToConstant: 200)
         ])
-    }
-   
-}
-
-extension BirthdayVC: BirthdayVCDelegate {
-    func update(name: String, age: String, time: Date) {
-        nameLabel.text? = name.capitalized
-        ageLabel.text? += age + " years"
     }
 }
