@@ -47,10 +47,10 @@ class BirthdayVC: UIViewController, BirthdayVCDelegate {
     @objc func addProfile() {
         let popUpVc = PopUpVC()
 
-        popUpVc.delegate = self
         if let sheeet = popUpVc.sheetPresentationController {
             sheeet.detents = [.large()]
         }
+        popUpVc.delegate = self
         present(popUpVc, animated: true, completion: nil)
     }
     
