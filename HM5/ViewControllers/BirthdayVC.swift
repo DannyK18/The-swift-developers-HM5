@@ -29,14 +29,29 @@ class BirthdayVC: UIViewController, BirthdayVCDelegate {
         return label
     }()
     
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        label.textColor = UIColor.gray
+        label.text = "\(Date())"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let photo: UIImageView = {
-        let foto = UIImageView()
+        let foto = UIImageView(frame: .zero)
         foto.image = UIImage(named: "person.circle.fill")
         foto.tintColor = .systemGray
+        foto.translatesAutoresizingMaskIntoConstraints = false
         return foto
     }()
     
-
+    private let dateFormatter: DateFormatter {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMM d, h:mm a"
+        dateFormatter.timeZone = .current
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,10 +59,10 @@ class BirthdayVC: UIViewController, BirthdayVCDelegate {
 
         navigationItem.title = "Birthday"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addProfile))
-        [nameLabel, ageLabel].forEach { subview in
+        [nameLabel, ageLabel, photo, dateLabel].forEach { subview in
             view.addSubview(subview)
-        
         }
+        photo.isHidden = true
         applyConstraints()
     }
     
@@ -64,25 +79,32 @@ class BirthdayVC: UIViewController, BirthdayVCDelegate {
     func update(name: String, age: String, time: Date) {
         nameLabel.text = name.capitalized
         ageLabel.text = age + " years"
-        self.view.addSubview(photo)
+        photo.isHidden = false
     }
     
     func applyConstraints() {
+        let safeArea = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
         
-            photo.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
-            photo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            photo.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 50),
+            photo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             photo.widthAnchor.constraint(equalToConstant: 71),
             photo.heightAnchor.constraint(equalToConstant: 71),
             
-            nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 90),
+            nameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 50),
             nameLabel.leadingAnchor.constraint(equalTo: photo.trailingAnchor, constant: 10),
-            nameLabel.widthAnchor.constraint(equalToConstant: 200),
-            
+            nameLabel.widthAnchor.constraint(equalToConstant: 150),
+
             ageLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
             ageLabel.leadingAnchor.constraint(equalTo: photo.trailingAnchor, constant: 10),
-            ageLabel.widthAnchor.constraint(equalToConstant: 200)
+            ageLabel.widthAnchor.constraint(equalToConstant: 150)
+        ])
+        
+        NSLayoutConstraint.activate([
+            dateLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 40),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            dateLabel.widthAnchor.constraint(equalToConstant: 100)
         ])
     }
 }
