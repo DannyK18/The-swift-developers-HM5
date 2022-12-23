@@ -25,7 +25,8 @@ class PopUpVC: UIViewController {
     
     private let profileImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "person")
+        image.image = UIImage(systemName: "person.circle.fill")
+        image.backgroundColor = .white
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -235,7 +236,7 @@ class PopUpVC: UIViewController {
     
     @objc func dismissSheet() {
         dismiss(animated: true, completion: nil)
-        delegate?.update(name: nameTextField.text!, age: ageTextField.text!, time: Date())
+        delegate?.update(name: nameTextField.text!, age: ageTextField.text!, time: Date(), image: profileImageView.image!)
     }
 
     @objc func changeImage() {
