@@ -277,15 +277,12 @@ class PopUpVC: UIViewController {
         let personImageConstrains = [
          profileImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
          profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//         profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 80),
-//         profileImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -80),
          profileImageView.widthAnchor.constraint(equalToConstant: 80),
          profileImageView.heightAnchor.constraint(equalToConstant: 90)
         ]
         
         let changeImageButtonConstrains = [
             changeImageButton.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 10),
-            //changeImageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -120)
             changeImageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
 
