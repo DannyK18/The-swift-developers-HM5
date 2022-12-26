@@ -95,6 +95,7 @@ class RegistrationVC: UIViewController {
         textField.keyboardType = .default
         textField.returnKeyType = .done
         textField.clearButtonMode = .whileEditing
+        textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
